@@ -1,0 +1,212 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Demo - combobox 的 gmail 模式</title>
+<link href="http://g.alicdn.com/kissy/k/1.4.7/css/dpl/base.css" rel="stylesheet"/>
+<script src="http://g.alicdn.com/kissy/k/1.4.7/seed.js"></script>
+<style type="text/css">
+    .ks-popupmenu {
+    background: #fff;
+    border-color: #999;
+    border-style: solid;
+    border-width: 1px;
+    cursor: default;
+    margin: 0;
+    outline: none;
+    padding: 4px 0;
+    position: absolute;
+    z-index: 99999;
+    left:-9999px;
+    top:-9999px;
+}
+
+.ks-popupmenu-shown{
+    visibility: visible;
+}
+
+.ks-popupmenu-hidden{
+    visibility: hidden;
+}
+
+.ks-menuitem {
+    color: #404040;
+    list-style: none;
+    margin: 0;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 1px 0 2px;
+    white-space: nowrap;
+}
+
+.ks-menuitem-disabled .ks-menuitem-content {
+    color: #ccc !important;
+}
+
+.ks-menuitem-highlight,
+.ks-menuitem-hover {
+    background-color: #39F;
+    color: white;
+}
+
+.ks-combobox {
+    border: 1px solid #B5B6B5;
+    background-color: #ddd;
+    display: inline-block;
+    /*clear float*/
+    overflow: hidden;
+    zoom: 1;
+    *display: inline;
+    font-size: 12px;
+}
+
+.ks-combobox-trigger {
+    text-decoration: none;
+    color: #000000;
+    float: right;
+    text-align: center;
+    border-left: 1px solid #b5b6b5;
+}
+
+.ks-combobox-trigger-inner {
+    float: left;
+    line-height: 18px;
+    height: 18px;
+    margin: 0 4px;
+    vertical-align: middle;
+}
+
+.ks-combobox-input-wrap {
+    overflow: hidden;
+    vertical-align: middle;
+    position: relative;
+}
+
+.ks-combobox-input {
+    font-size: 12px;
+    float: left;
+    width: 100%;
+    vertical-align: middle;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 0;
+    color: #000;
+}
+
+.ks-combobox-input {
+    line-height: 18px;
+    height: 18px;
+    overflow-y: visible;
+    font-size: 100%;
+}
+
+.ks-menuitem-disabled {
+    color: #808080;
+}
+
+
+</style>
+</head>
+<body>
+
+<h1 style="text-align: center">gmail 多选模式</h1>
+<div style="margin:10px auto; width:80%;text-align: center" id="container">
+    <h2>
+        static : input a or b or c or d or 3，逗号分隔
+    </h2>
+</div>
+<script>
+KISSY.use('json, gallery/pageNotification/1.0/index', function(S, JSON, PN) {
+    var pn = new PN({
+        "closeButton": true,
+        "positionClass": "page-notification-top-right",
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    });
+
+    window.alert = function() {
+        var args = arguments[0];
+        args = S.isObject(args) ? JSON.stringify(args) : args.toString();
+        pn.success(args);
+    };
+
+    KISSY.use("combobox", function (S, ComboBox) {
+        var data = [
+            '"a123456" <a123456@gmail.com>',
+            '"b12345" <b12345@gmail.com>',
+            'c3464356@gmail.com',
+            '"d23434" <d23434@gmail.com>'
+        ];
+
+        var basicComboBox = new ComboBox.MultiValueComboBox({
+            render:'#container',
+            width:500,
+            separator:',',
+            hasTrigger:false,
+            input:S.all('<textarea ' +
+                'style="width: 100%;height:18px;" ' +
+                'class="ks-combobox-input">' +
+                '</textarea>'),
+            updateInputOnDownUp:false,
+            format:function (query, data) {
+                var ret = [];
+                for (var i = 0; i < data.length; i++) {
+                    var v = data[i] + "";
+                    if (query) {
+                        ret[i] = {
+                            content:S.escapeHTML(v)
+                                .replace(new RegExp(S.escapeRegExp(query), "g"),
+                                "<b>$&</b>")
+                        };
+                    } else {
+                        ret[i] = {
+                            content:S.escapeHTML(v)
+                        };
+                    }
+                }
+                return ret;
+            },
+            dataSource:new ComboBox.LocalDataSource({
+                data:data,
+                parse:function (query, data) {
+                    var ret = [];
+                    S.each(data, function (d) {
+                        if (d.replace(/@gmail\.com/, "").indexOf(query) != -1) {
+                            ret.push(d);
+                        }
+                    });
+                    return ret;
+                }
+            })
+        });
+
+        basicComboBox.render();
+
+        var basicComboBoxEl = basicComboBox.get("input");
+
+        basicComboBoxEl.on("keyup", function () {
+            // scrollHeight will always grow in chrome
+            basicComboBoxEl.css("height", 0);
+            basicComboBoxEl.css("height", basicComboBoxEl[0].scrollHeight);
+        });
+
+        basicComboBox.on("click", function (e) {
+            var item = e.target;
+            alert(item.get("value") + "\n" + item.get("content") +
+                "\n" + item.get("textContent"));
+        });
+
+    });
+});
+</script>
+
+</body>
+</html>

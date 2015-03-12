@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>test kissy5.0</title>
+	<script type="text/javascript" src="http://dev.docs.kissyui.com/kissy/build/seed-debug.js"></script>
+</head>
+<body>
+<a href="/面向前端的动画基础.key">面向前端的动画基础</a>
+<script type="text/javascript">
+modulex.use(['router'], function(Router){
+	Router.get('/:path*', function(req,res,next){
+		debugger;
+		next();
+	});
+	Router.get('/list/*', function(req){
+		debugger;
+	});
+
+	Router.navigate('/list/what/item1');
+})
+</script>
+</body>
+</html>

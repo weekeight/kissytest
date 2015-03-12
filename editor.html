@@ -1,0 +1,89 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Demo - editor 按需加载 + 自动 combo</title>
+    <link href="http://g.tbcdn.cn/kissy/k/1.4.4/css/dpl/base-min.css" rel="stylesheet"/>
+    <link href="http://g.tbcdn.cn/kissy/k/1.4.4/editor/theme/cool/editor-min.css?1" rel="stylesheet"/>
+    <!-- use seed-min in production-->
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.9/seed.js"></script>
+</head>
+<body>
+<div id="editorContainer" style="margin:20px ">
+</div>
+<!-- <textarea id="ks-editor-textarea2" style="width:600px;height: 400px;">
+    hello,ks-editor-textarea2
+</textarea> -->
+<script type="text/javascript">
+   KISSY.use('editor', function(S, Editor){
+
+        KISSY.use('editor/plugin/font-size', function(S, FontSize){
+            var editor_ins1 = new Editor({
+                render: '#editorContainer',
+                focused : true,
+                attachForm: true,
+                baseZIndex: 10000,
+                plugins : [
+                    new FontSize({
+                        matchElWidth: false,
+                        collapsed : true,
+                        menu: {
+                            collapsed : true,
+                            children: [
+                                {
+                                    value: "14px",
+                                    textContent: "标准",
+                                    elAttrs: {
+                                        style: 'position: relative; border: 1px solid #DDDDDD; margin: 2px; padding: 2px;'
+                                    },
+                                    content: " <span style='font-size:14px'>标准</span>" +
+                                        "<span style='position:absolute;top:1px;right:3px;'>14px</span>"
+                                },
+                                {
+                                    value: "16px",
+                                    textContent: "大",
+                                    elAttrs: {
+                                        style: 'position: relative; border: 1px solid #DDDDDD; margin: 2px; padding: 2px;'
+                                    },
+                                    content: "" +
+                                        " <span style='font-size:16px'>大</span>" +
+                                        "<span style='position:absolute;top:1px;right:3px;'>16px</span>"
+                                },
+                                {
+                                    value: "18px",
+                                    textContent: "特大",
+                                    elAttrs: {
+                                        style: 'position: relative; border: 1px solid #DDDDDD; margin: 2px; padding: 2px;'
+                                    },
+                                    content: "" +
+                                        " <span style='font-size:18px'>特大</span>" +
+                                        "<span style='position:absolute;top:1px;right:3px;'>18px</span>"
+                                },
+                                {
+                                    value: "20px",
+                                    textContent: "极大",
+                                    elAttrs: {
+                                        style: 'position: relative; border: 1px solid #DDDDDD; margin: 2px; padding: 2px;'
+                                    },
+                                    content: "" +
+                                        " <span style='font-size:20px'>极大</span>" +
+                                        "<span style='position:absolute;top:1px;right:3px;'>20px</span>"
+                                }
+                            ],
+                            width: "125px"
+                        }
+                    })
+                ]
+            });
+            editor_ins1.on('afterSyncUI', function(ev){
+                debugger;
+            });
+            editor_ins1.render();
+        })
+    
+   })
+</script>
+
+</body>
+</html>

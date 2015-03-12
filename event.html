@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>test kissy5.0</title>
+	<script type="text/javascript" src="http://dev.docs.kissyui.com/kissy/build/seed-debug.js"></script>
+</head>
+<body>
+<a href="/面向前端的动画基础.key">面向前端的动画基础</a>
+<div>
+	<div id="test" style="width:50px;height:50px;border:1px red solid;position:absolute;left:50px;top:100px;"></div>
+</div>
+<script type="text/javascript">
+modulex.use(['node', 'event-dom/gesture/edge-pan', 'dd'], function($, GestureEdgePan, DD){
+		new DD.Draggable({
+			node : '#test',
+			move:true
+		});
+
+		$('#test').on(GestureEdgePan.EDGE_PAN_START, function(ev){
+			console.log('edge start');
+			console.log(ev);
+		});
+		$('#test').on(GestureEdgePan.EDGE_PAN, function(ev){
+			console.log('edging');
+			console.log(ev);
+		});
+		$('#test').on(GestureEdgePan.EDGE_PAN, function(ev){
+			console.log('edge end');
+			console.log(ev);
+		});
+	});
+</script>
+</body>
+</html>

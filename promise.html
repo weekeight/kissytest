@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test kissy5.0</title>
+	<script type="text/javascript" src="http://g.tbcdn.cn/kissy/edge/2014.07.16/seed-debug.js"></script>
+</head>
+<body>
+<div id="test" class="hide">benfchen test</div>
+<script type="text/javascript">
+KISSY.use(['promise'], function(S, Promise) {
+    var defer = new Promise.Defer(),
+    	promise = defer.promise;
+    promise.progress(function(a,b,c){
+    	debugger;
+    });
+    defer.notify();
+});
+</script>
+</body>
+</html>

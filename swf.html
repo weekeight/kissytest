@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test kissy5.0</title>
+	<script type="text/javascript" src="http://dev.docs.kissyui.com/kissy/build/seed-debug.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    KISSY.use(['swf', 'dom'], function(S, SWF, Dom){
+        var render = Dom.create('<div class="test"></div>');
+        Dom.prepend(render, document.body);
+        var swf1 = new SWF({
+            src: 'http://dev.docs.kissyui.com/kissy/src/swf/tests/t-assets/test.swf',
+            render: render,
+            attrs: {
+                width: 300,
+                height: 300
+            },
+            params: {
+                bgcolor: '#d55867'
+            }
+        });
+        var index = swf1.get('html').replace('classid', '').indexOf('id=');
+    })
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test jquery</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+</head>
+<body>
+<select id="test">
+	<option value="2">2333</option>
+	<option value="3">333</option>
+</select>
+<script type="text/javascript">
+	$(function(){
+		$('#test').on('change', function(ev){
+			debugger;
+			var test = $(this);
+			test.find('option:selected').html();
+		})
+	});
+</script>
+</body>
+</html>

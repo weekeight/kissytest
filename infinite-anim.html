@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>infinite animation</title>
+	<style>
+	#test{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100px;
+		height: 100px;
+		background: #080;
+		transform : scale(1.0);
+		-webkit-transform: scale(1.0);
+		-webkit-animation: testanim 5s ease-out 0s infinite;
+		-o-animation: testanim 5s ease-out 0s infinite;
+		animation: testanim 5s ease-out 0s infinite;
+	}
+	@keyframes testanim{
+		0%{
+			left: 0;
+			top: 0;
+			transform : scale(1.0);
+			-webkit-transform: scale(1.0);
+		}
+		50%{
+			left: 200px;
+			top: 0;
+			transform : scale(3.0);
+			-webkit-transform: scale(3.0);
+		}
+		100%{	
+			left: 0;
+			top: 0;
+			transform : scale(1.0);
+			-webkit-transform: scale(1.0);
+		}
+	}
+	@-webkit-keyframes testanim{
+		0%{
+			left: 0;
+			top: 0;
+			transform : scale(1.0);
+			-webkit-transform: scale(1.0);
+		}
+		50%{
+			left: 200px;
+			top: 0;
+			transform : scale(3.0);
+			-webkit-transform: scale(3.0);
+		}
+		100%{	
+			left: 0;
+			top: 0;
+			transform : scale(1.0);
+			-webkit-transform: scale(1.0);
+		}
+	}
+	</style>
+</head>
+<body>
+	<div id="test"></div>
+</body>
+</html>

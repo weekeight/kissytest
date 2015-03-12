@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test 1.2 ajax</title>
+	<script type="text/javascript" src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy.js "></script>
+</head>
+<body>
+<script type="text/javascript">
+	KISSY.ready(function(S){
+		var IO = S.ajax;
+		IO({
+			url : '/citycode.php',
+			type : 'post',
+			dataType : 'json',
+			data : {
+				test : 'just a test'
+			},
+			success : function(res){
+				debugger;
+			},
+			error : function(err){
+				debugger;
+			}
+		});
+	});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test ajax</title>
+	<script type="text/javascript" src="http://g.tbcdn.cn/kissy/k/1.4.2/seed.js"></script>
+</head>
+<body>
+<form id="test" method="get" action="/test/back">
+	<input type="text" name="age" value="23">
+	<input type="text" name="name" value="benfchen">
+	<input type="submit" >
+</form>
+<script type="text/javascript">
+
+KISSY.use('io', function(S, IO){
+	function result(data){
+		debugger;
+	}
+    debugger;
+	new IO({
+        dataType : 'jsonp',
+
+        data : {
+            v : '1.0',
+            q : 'apple'
+        },
+        url : 'http://ajax.googleapis.com/ajax/services/search/web' ,
+        success : function(data){
+            debugger;
+            if(data.status == 0){
+                app.getLocationDefer.resolve(data);
+            }else{
+                app.getLocationDefer.reject(data);
+            }
+            
+        },
+        error : function(data, textStatus, io){
+            debugger;
+            alert('error:' + textStatus);
+        }
+    });
+})
+</script>
+</body>
+</html>

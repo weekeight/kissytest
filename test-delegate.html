@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test delegate in kissy@1.4.4</title>
+<script charset="utf-8" src="http://g.tbcdn.cn/kissy/k/1.4.4/seed.js"></script>
+</head>
+<style type="text/css">
+	.test{
+		width: 500px;
+		height: 500px;
+		border: 1px red solid;
+	}
+	.inner{
+		width: 200px;
+		height: 200px;
+		border: 1px blue solid;
+	}
+</style>
+<body>
+<div class="test">
+	<div class="inner">inner1</div>
+	<div class="inner">inner2</div>
+</div>
+<script type="text/javascript">
+	KISSY.use('core',function(S){
+		var $ = S.all;
+		$('.test').delegate('mouseenter', '.inner', function(e){
+			var currentTarget$ = $(e.currentTarget);
+			alert(currentTarget$.html());
+		})
+	})
+</script>
+</body>
+</html>
